@@ -1,8 +1,9 @@
-// ignore_for_file: file_names, unused_import
+// ignore_for_file: file_names, unused_import, avoid_print
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 import 'package:noviindus/main.dart';
+import 'package:noviindus/view/pages/home/homePage.dart';
 import 'package:noviindus/view/widgets/myForm/emailForm/emailForm.dart';
 import 'package:noviindus/view/widgets/myButton/myButton.dart';
 import 'package:noviindus/view/widgets/myForm/passwordForm/passwordForm.dart';
@@ -55,6 +56,12 @@ class LoginOrRegister extends StatelessWidget {
             ),
             MyButton(
               name: 'Login',
+              onTap: () {
+                print('LogIn');
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HomePage();
+                }));
+              },
             ),
             SizedBox(
               height: 90.h,

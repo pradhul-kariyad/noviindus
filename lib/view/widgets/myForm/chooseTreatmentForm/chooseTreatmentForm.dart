@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 
-class LocationForm extends StatelessWidget {
-  const LocationForm({super.key});
+class ChooseTreatmentForm extends StatelessWidget {
+  const ChooseTreatmentForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +15,11 @@ class LocationForm extends StatelessWidget {
           padding:
               EdgeInsets.only(left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
           child: Text(
-            'Location',
+            'Choose Treatment',
             style: TextStyle(
                 color: myBlack,
                 fontFamily: 'Poppins',
                 fontSize: 12.sp,
-
                 fontWeight: FontWeight.w500),
           ),
         ),
@@ -36,11 +35,11 @@ class LocationForm extends StatelessWidget {
                 color: green,
                 size: 28.sp,
               ),
-              hintText: 'Choose your location',
+              hintText: 'Choose prefered treatment',
               hintStyle: TextStyle(
                   color: Colors.grey,
                   fontFamily: 'Poppins',
-                  fontSize: 13.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w400),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
@@ -57,7 +56,7 @@ class LocationForm extends StatelessWidget {
             style: TextStyle(
                 color: myBlack,
                 fontFamily: 'Poppins',
-                fontSize: 13.sp,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w400),
           ),
         ),

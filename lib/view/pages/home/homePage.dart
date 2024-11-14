@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/auth/LoginOrRegister/LoginOrRegister.dart';
 import 'package:noviindus/colors/colors.dart';
+import 'package:noviindus/view/pages/registerPage/registerPage.dart';
 import 'package:noviindus/view/widgets/homeWidgets/homeContainer/homeContainer.dart';
 import 'package:noviindus/view/widgets/homeWidgets/homeRow/homeRow.dart';
 import 'package:noviindus/view/widgets/myButton/myButton.dart';
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
             print('Back button');
           },
           bellTap: () {
-              print('Bell button');
+            print('Bell button');
           },
         ),
         backgroundColor: white,
@@ -48,7 +49,14 @@ class HomePage extends StatelessWidget {
                 Positioned(
                   left: 15.w,
                   bottom: 0.h,
-                  child: MyButton(name: 'Register Now'),
+                  child: MyButton(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return RegisterPage();
+                        }));
+                      },
+                      name: 'Register Now'),
                 ),
               ],
             ),

@@ -19,6 +19,7 @@ class WhatsAppForm extends StatelessWidget {
             style: TextStyle(
                 color: myBlack,
                 fontFamily: 'Poppins',
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500),
           ),
         ),
@@ -33,7 +34,7 @@ class WhatsAppForm extends StatelessWidget {
               hintStyle: TextStyle(
                   color: Colors.grey,
                   fontFamily: 'Poppins',
-                  fontSize: 13.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w400),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),

@@ -5,6 +5,7 @@ import 'package:noviindus/auth/LoginOrRegister/LoginOrRegister.dart';
 import 'package:noviindus/view/pages/home/homePage.dart';
 import 'package:noviindus/view/pages/registerPage/registerPage.dart';
 import 'package:noviindus/view/screens/splaashScreen/splaashScreen.dart';
+import 'package:noviindus/view/widgets/editGender/editGender.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const HomePage(),
+      child: const LoginOrRegister(),
     );
   }
 }

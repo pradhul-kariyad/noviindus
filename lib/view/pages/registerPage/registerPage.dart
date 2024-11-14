@@ -2,12 +2,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
+import 'package:noviindus/view/pages/registerPage/paymentOptionRow/paymentOptionRow.dart';
+import 'package:noviindus/view/widgets/editGender/editGender.dart';
+import 'package:noviindus/view/widgets/myButton/addButton.dart';
+import 'package:noviindus/view/widgets/myButton/myButton.dart';
+import 'package:noviindus/view/widgets/myForm/treatmentDateForm/treatmentDateForm.dart';
 import 'package:noviindus/view/widgets/myForm/addressForm/addressForm.dart';
+import 'package:noviindus/view/widgets/myForm/advanceAmountForm/advanceAmountForm.dart';
+import 'package:noviindus/view/widgets/myForm/balanceAmountForm/balanceAmountForm.dart';
 import 'package:noviindus/view/widgets/myForm/branchForm/branchForm.dart';
+import 'package:noviindus/view/widgets/myForm/discountAmountForm/discountAmountForm.dart';
 import 'package:noviindus/view/widgets/myForm/locationForm/locationForm.dart';
+import 'package:noviindus/view/widgets/myForm/totalAmountForm/totalAmountForm.dart';
+import 'package:noviindus/view/widgets/myForm/treatmentTimeForm/treatmentTimeForm.dart';
 import 'package:noviindus/view/widgets/myIcons/myIcons.dart';
 import 'package:noviindus/view/widgets/myForm/nameForm/nameForm.dart';
 import 'package:noviindus/view/widgets/myForm/whatsAppForm/whatsAppForm.dart';
+import 'package:noviindus/view/widgets/registerWidget/registerContainer/registerContainer.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -57,48 +68,57 @@ class RegisterPage extends StatelessWidget {
                 style: TextStyle(
                     color: myBlack,
                     fontFamily: 'Poppins',
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 15.w, right: 15.w, bottom: 15.h),
-                  height: 100.h,
-                  width: 330.w,
-                  decoration: BoxDecoration(
-                    color: containerColor,
-                    borderRadius: BorderRadius.circular(10.sp),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20.w, bottom: 2.h),
-                    child: Row(
-                      children: [
-                        Text(
-                          '1.',
-                          style: TextStyle(
-                              color: black,
-                              fontFamily: 'Poppins',
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(width: 10.w),
-                        Text(
-                          'Couple Combo package i..',
-                          style: TextStyle(
-                              color: black,
-                              fontFamily: 'Poppins',
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            )
+            RegisterContainer(
+              clearTap: () {
+                print('Clear button');
+              },
+              editTap: () {
+                print('Edit button');
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return EditGender();
+                }));
+              },
+            ),
+            AddButton(
+              onTap: () {
+                print('Add button');
+              },
+            ),
+            TotalAmountForm(),
+            DiscountAmountForm(),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
+              child: Text(
+                'Payment Option',
+                style: TextStyle(
+                    color: myBlack,
+                    fontFamily: 'Poppins',
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            PaymentOptionRow(),
+            AdvanceAmountForm(),
+            BalanceAmountForm(),
+            TreatmentDateForm(),
+            TreatmentTimeForm(),
+            SizedBox(
+              height: 35.h,
+            ),
+            MyButton(
+              name: 'Save',
+              onTap: () {
+                print('Save button');
+              },
+            ),
+            SizedBox(
+              height: 35.h,
+            ),
           ],
         ),
       ),

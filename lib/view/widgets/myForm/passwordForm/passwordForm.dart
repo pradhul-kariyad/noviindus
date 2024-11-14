@@ -17,6 +17,7 @@ class PasswordForm extends StatelessWidget {
           child: Text(
             'Password',
             style: TextStyle(
+                fontSize: 12.sp,
                 color: myBlack,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500),
@@ -33,7 +34,7 @@ class PasswordForm extends StatelessWidget {
               hintStyle: TextStyle(
                   color: Colors.grey,
                   fontFamily: 'Poppins',
-                  fontSize: 13.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w400),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
