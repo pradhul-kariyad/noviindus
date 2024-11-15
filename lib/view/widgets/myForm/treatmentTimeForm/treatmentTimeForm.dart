@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 
 class TreatmentTimeForm extends StatelessWidget {
-  const TreatmentTimeForm({super.key});
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  const TreatmentTimeForm({super.key, this.validator, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +33,9 @@ class TreatmentTimeForm extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(right: 5.w),
                   child: TextFormField(
-                    // validator: validator,
+                    validator: validator,
                     // obscureText: obscureText,
-                    // controller: controller,
+                    controller: controller,
                     decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.keyboard_arrow_down_sharp,

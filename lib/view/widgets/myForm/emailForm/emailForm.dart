@@ -4,7 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 
 class EmailForm extends StatelessWidget {
-  const EmailForm({super.key});
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+
+  const EmailForm({
+    super.key,
+    this.validator,
+    this.controller,
+    // required Null Function(dynamic value) onSaved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +34,9 @@ class EmailForm extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: TextFormField(
-            // validator: validator,
+            validator: validator,
             // obscureText: obscureText,
-            // controller: controller,
+            controller: controller,
             decoration: InputDecoration(
               hintText: 'Enter your email',
               hintStyle: TextStyle(

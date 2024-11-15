@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 
 class AdvanceAmountForm extends StatelessWidget {
-  const AdvanceAmountForm({super.key});
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  const AdvanceAmountForm({super.key, this.validator, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,9 @@ class AdvanceAmountForm extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: TextFormField(
-            // validator: validator,
+            validator: validator,
             // obscureText: obscureText,
-            // controller: controller,
+            controller: controller,
             decoration: InputDecoration(
               // hintText: 'Enter your email',
               // hintStyle: TextStyle(

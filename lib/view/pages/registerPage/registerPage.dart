@@ -1,9 +1,11 @@
-// ignore_for_file: file_names, avoid_print
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
+import 'package:noviindus/provider/patientUpdateProvider/patientUpdateProvider.dart';
+import 'package:noviindus/view/pages/home/homePage.dart';
 import 'package:noviindus/view/pages/registerPage/paymentOptionRow/paymentOptionRow.dart';
 import 'package:noviindus/view/widgets/editGender/editGender.dart';
+import 'package:noviindus/view/widgets/myForm/locationForm/locationForm.dart';
 import 'package:noviindus/view/widgets/myButton/addButton.dart';
 import 'package:noviindus/view/widgets/myButton/myButton.dart';
 import 'package:noviindus/view/widgets/myForm/treatmentDateForm/treatmentDateForm.dart';
@@ -12,114 +14,165 @@ import 'package:noviindus/view/widgets/myForm/advanceAmountForm/advanceAmountFor
 import 'package:noviindus/view/widgets/myForm/balanceAmountForm/balanceAmountForm.dart';
 import 'package:noviindus/view/widgets/myForm/branchForm/branchForm.dart';
 import 'package:noviindus/view/widgets/myForm/discountAmountForm/discountAmountForm.dart';
-import 'package:noviindus/view/widgets/myForm/locationForm/locationForm.dart';
 import 'package:noviindus/view/widgets/myForm/totalAmountForm/totalAmountForm.dart';
 import 'package:noviindus/view/widgets/myForm/treatmentTimeForm/treatmentTimeForm.dart';
 import 'package:noviindus/view/widgets/myIcons/myIcons.dart';
 import 'package:noviindus/view/widgets/myForm/nameForm/nameForm.dart';
 import 'package:noviindus/view/widgets/myForm/whatsAppForm/whatsAppForm.dart';
 import 'package:noviindus/view/widgets/registerWidget/registerContainer/registerContainer.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+    // Controllers for form fields
+    final _nameController = TextEditingController();
+    final _whatsAppController = TextEditingController();
+    final _addressController = TextEditingController();
+    final _branchController = TextEditingController();
+    final _totalAmountController = TextEditingController();
+    final _discountAmountController = TextEditingController();
+    final _advanceAmountController = TextEditingController();
+    final _balanceAmountController = TextEditingController();
+    final _treatmentDateController = TextEditingController();
+    final _treatmentTimeController = TextEditingController();
+
+    // Provider instance
+    final patientUpdateProvider = Provider.of<PatientUpdateProvider>(context);
+
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: white,
         title: MyIcons(
           backTap: () {
-            print('Back button');
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
           },
           bellTap: () {
-            print('Bell button');
+            print('Bell button tapped');
           },
         ),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 2.h, left: 28.w, bottom: 5.h),
-              child: Text(
-                'Register',
-                style: TextStyle(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 2.h, left: 28.w, bottom: 5.h),
+                child: Text(
+                  'Register',
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: myBlack,
                     fontFamily: 'Poppins',
-                    fontSize: 20.sp),
+                    fontSize: 20.sp,
+                  ),
+                ),
               ),
-            ),
-            Divider(),
-            NameForm(),
-            WhatsAppForm(),
-            AddressForm(),
-            LocationForm(),
-            BranchForm(),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
-              child: Text(
-                'Treatments',
-                style: TextStyle(
+              const Divider(),
+              // Form Fields
+              NameForm(controller: _nameController),
+              WhatsAppForm(controller: _whatsAppController),
+              AddressForm(controller: _addressController),
+              LocationForm(),
+              BranchForm(controller: _branchController),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
+                child: Text(
+                  'Treatments',
+                  style: TextStyle(
                     color: myBlack,
                     fontFamily: 'Poppins',
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ),
-            RegisterContainer(
-              clearTap: () {
-                print('Clear button');
-              },
-              editTap: () {
-                print('Edit button');
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return EditGender();
-                }));
-              },
-            ),
-            AddButton(
-              onTap: () {
-                print('Add button');
-              },
-            ),
-            TotalAmountForm(),
-            DiscountAmountForm(),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
-              child: Text(
-                'Payment Option',
-                style: TextStyle(
+              RegisterContainer(
+                clearTap: () {
+                  print('Clear button tapped');
+                },
+                editTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditGender()),
+                  );
+                },
+              ),
+              AddButton(onTap: () => print('Add button tapped')),
+              TotalAmountForm(controller: _totalAmountController),
+              DiscountAmountForm(controller: _discountAmountController),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
+                child: Text(
+                  'Payment Option',
+                  style: TextStyle(
                     color: myBlack,
                     fontFamily: 'Poppins',
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ),
-            PaymentOptionRow(),
-            AdvanceAmountForm(),
-            BalanceAmountForm(),
-            TreatmentDateForm(),
-            TreatmentTimeForm(),
-            SizedBox(
-              height: 35.h,
-            ),
-            MyButton(
-              name: 'Save',
-              onTap: () {
-                print('Save button');
-              },
-            ),
-            SizedBox(
-              height: 35.h,
-            ),
-          ],
+              PaymentOptionRow(),
+              AdvanceAmountForm(controller: _advanceAmountController),
+              BalanceAmountForm(controller: _balanceAmountController),
+              TreatmentDateForm(controller: _treatmentDateController),
+              TreatmentTimeForm(controller: _treatmentTimeController),
+              SizedBox(height: 35.h),
+              // Save Button with API Integration
+              MyButton(
+                name: 'Save',
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+
+                    // Trigger API call
+                    patientUpdateProvider.updatePatient(
+                      name: _nameController.text,
+                      executive: "Default Executive",
+                      payment: "Cash",
+                      phone: _whatsAppController.text,
+                      address: _addressController.text,
+                      totalAmount:
+                          double.tryParse(_totalAmountController.text.trim()) ??
+                              0.0,
+                      discountAmount: double.tryParse(
+                              _discountAmountController.text.trim()) ??
+                          0.0,
+                      advanceAmount: double.tryParse(
+                              _advanceAmountController.text.trim()) ??
+                          0.0,
+                      balanceAmount: double.tryParse(
+                              _balanceAmountController.text.trim()) ??
+                          0.0,
+                      dateAndTime: _treatmentDateController.text,
+                      id: "123", // Replace with dynamic ID
+                      male: [1, 2, 3], // Replace with actual data
+                      female: [4, 5, 6], // Replace with actual data
+                      branch: _branchController.text,
+                      treatments: [1, 2], // Replace with actual data
+                      context: context,
+                    );
+                  }
+                },
+              ),
+              SizedBox(height: 35.h),
+            ],
+          ),
         ),
       ),
     );
