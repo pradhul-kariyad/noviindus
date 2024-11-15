@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously, file_names
-
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
@@ -49,36 +48,51 @@ class LoginProvider extends ChangeNotifier {
           await pref.setString('token', token);
           await pref.setBool('userlogin', true);
           log('Token stored: $token');
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
               backgroundColor: green,
               content: Center(
-                  child: Text(
-                "Welcome...",
-                style: TextStyle(color: white, fontFamily: 'Poppins'),
-              ))));
+                child: Text(
+                  "Welcome...",
+                  style: TextStyle(color: white, fontFamily: 'Poppins'),
+                ),
+              ),
+            ),
+          );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
               backgroundColor: green,
-              content: Text("Invalid username or password")));
+              content: Text("Invalid username or password"),
+            ),
+          );
         }
       } else {
         var responseBody = jsonDecode(response.body);
         String errorMessage = responseBody['error'] ?? 'Log-in failed...';
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(backgroundColor: green, content: Text(errorMessage)));
+          SnackBar(
+            backgroundColor: green,
+            content: Text(errorMessage),
+          ),
+        );
 
         log("Log-in failed: $errorMessage");
       }
     } catch (e) {
       log('Error during Log-in: $e');
       setLoading(false);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           backgroundColor: green,
           content: Center(
-              child: Text(
-            "Welcome...",
-            style: TextStyle(color: white, fontFamily: 'Poppins'),
-          ))));
+            child: Text(
+              "Welcome...",
+              style: TextStyle(color: white, fontFamily: 'Poppins'),
+            ),
+          ),
+        ),
+      );
     }
   }
 }

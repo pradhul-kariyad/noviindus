@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print, no_leading_underscores_for_local_identifiers, file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
@@ -28,8 +29,6 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-    // Controllers for form fields
     final _nameController = TextEditingController();
     final _whatsAppController = TextEditingController();
     final _addressController = TextEditingController();
@@ -41,9 +40,6 @@ class RegisterPage extends StatelessWidget {
     final _treatmentDateController = TextEditingController();
     final _treatmentTimeController = TextEditingController();
 
-    // Provider instance
-    final patientUpdateProvider = Provider.of<PatientUpdateProvider>(context);
-
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -53,7 +49,9 @@ class RegisterPage extends StatelessWidget {
           backTap: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
             );
           },
           bellTap: () {
@@ -81,7 +79,6 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               const Divider(),
-              // Form Fields
               NameForm(controller: _nameController),
               WhatsAppForm(controller: _whatsAppController),
               AddressForm(controller: _addressController),
@@ -107,11 +104,17 @@ class RegisterPage extends StatelessWidget {
                 editTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EditGender()),
+                    MaterialPageRoute(
+                      builder: (context) => EditGender(),
+                    ),
                   );
                 },
               ),
-              AddButton(onTap: () => print('Add button tapped')),
+              AddButton(
+                onTap: () {
+                  print('Add button tapped');
+                },
+              ),
               TotalAmountForm(controller: _totalAmountController),
               DiscountAmountForm(controller: _discountAmountController),
               Padding(
@@ -133,41 +136,43 @@ class RegisterPage extends StatelessWidget {
               TreatmentDateForm(controller: _treatmentDateController),
               TreatmentTimeForm(controller: _treatmentTimeController),
               SizedBox(height: 35.h),
-              // Save Button with API Integration
-              MyButton(
-                name: 'Save',
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-
-                    // Trigger API call
-                    patientUpdateProvider.updatePatient(
-                      name: _nameController.text,
-                      executive: "Default Executive",
-                      payment: "Cash",
-                      phone: _whatsAppController.text,
-                      address: _addressController.text,
-                      totalAmount:
-                          double.tryParse(_totalAmountController.text.trim()) ??
+              Consumer<PatientUpdateProvider>(
+                builder: (BuildContext context, patientUpdateProvider,
+                    Widget? child) {
+                  return MyButton(
+                    name: 'Save',
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        patientUpdateProvider.updatePatient(
+                          name: _nameController.text,
+                          executive: "Default Executive",
+                          payment: "Cash",
+                          phone: _whatsAppController.text,
+                          address: _addressController.text,
+                          totalAmount: double.tryParse(
+                                  _totalAmountController.text.trim()) ??
                               0.0,
-                      discountAmount: double.tryParse(
-                              _discountAmountController.text.trim()) ??
-                          0.0,
-                      advanceAmount: double.tryParse(
-                              _advanceAmountController.text.trim()) ??
-                          0.0,
-                      balanceAmount: double.tryParse(
-                              _balanceAmountController.text.trim()) ??
-                          0.0,
-                      dateAndTime: _treatmentDateController.text,
-                      id: "123", // Replace with dynamic ID
-                      male: [1, 2, 3], // Replace with actual data
-                      female: [4, 5, 6], // Replace with actual data
-                      branch: _branchController.text,
-                      treatments: [1, 2], // Replace with actual data
-                      context: context,
-                    );
-                  }
+                          discountAmount: double.tryParse(
+                                  _discountAmountController.text.trim()) ??
+                              0.0,
+                          advanceAmount: double.tryParse(
+                                  _advanceAmountController.text.trim()) ??
+                              0.0,
+                          balanceAmount: double.tryParse(
+                                  _balanceAmountController.text.trim()) ??
+                              0.0,
+                          dateAndTime: _treatmentDateController.text,
+                          id: "",
+                          male: [1, 2, 3],
+                          female: [4, 5, 6],
+                          branch: _branchController.text,
+                          treatments: [1, 2],
+                          context: context,
+                        );
+                      }
+                    },
+                  );
                 },
               ),
               SizedBox(height: 35.h),

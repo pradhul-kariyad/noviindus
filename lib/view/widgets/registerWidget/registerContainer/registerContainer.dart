@@ -7,7 +7,6 @@ import 'package:noviindus/colors/colors.dart';
 class RegisterContainer extends StatefulWidget {
   final void Function()? clearTap;
   final void Function()? editTap;
-  // final int femaleCount;
   const RegisterContainer({
     super.key,
     this.clearTap,

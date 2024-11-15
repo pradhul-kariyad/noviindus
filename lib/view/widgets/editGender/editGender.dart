@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, unused_import
+// ignore_for_file: library_private_types_in_public_api, unused_import, avoid_print, file_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -242,8 +242,11 @@ class _EditGenderState extends State<EditGender> {
                         child: MyButton(
                           name: 'Save',
                           onTap: () {
+                            Navigator.pop(context, {
+                              'maleCount': _maleCount,
+                              'femaleCount': _femaleCount,
+                            });
                             print("Save button");
-                            // Return both male and female counts
                           },
                         ),
                       )
