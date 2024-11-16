@@ -53,7 +53,7 @@ class LoginProvider extends ChangeNotifier {
               backgroundColor: green,
               content: Center(
                 child: Text(
-                  "Welcome...",
+                  "Welcome",
                   style: TextStyle(color: white, fontFamily: 'Poppins'),
                 ),
               ),

@@ -15,21 +15,20 @@ class LocationForm extends StatefulWidget {
 
 class _LocationFormState extends State<LocationForm> {
   List<String> locations = [
-    'Kannur',
-    'Wayanad',
-    'Kochi',
-    'Kozhikode',
     'Alappuzha',
+    'Ernakulam',
     'Idukki',
+    'Kannur',
     'Kasaragod',
     'Kollam',
     'Kottayam',
+    'Kozhikode',
     'Malappuram',
     'Palakkad',
     'Pathanamthitta',
     'Thiruvananthapuram',
     'Thrissur',
-    ''
+    'Wayanad',
   ];
   String? selectedLocation;
 
