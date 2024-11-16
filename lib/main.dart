@@ -1,10 +1,12 @@
 // ignore_for_file: unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:noviindus/auth/LoginOrRegister/LoginOrRegister.dart';
+import 'package:noviindus/auth/LogIn/LogIn.dart';
 import 'package:noviindus/provider/PatientListProvider/PatientListDataProvider.dart';
 import 'package:noviindus/provider/auth/loginProvider.dart';
+import 'package:noviindus/provider/homeRowProvider/homeRowProvider.dart';
 import 'package:noviindus/provider/patientUpdateProvider/patientUpdateProvider.dart';
+import 'package:noviindus/provider/paymentOptionProvider/paymentOptionProvider.dart';
 import 'package:noviindus/view/pages/home/homePage.dart';
 import 'package:noviindus/view/pages/registerPage/registerPage.dart';
 import 'package:noviindus/view/screens/splaashScreen/splaashScreen.dart';
@@ -31,11 +33,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) {
           return PatientUpdateProvider();
         }),
+        ChangeNotifierProvider(create: (context) {
+          return HomeRowProvider();
+        }),
+        ChangeNotifierProvider(create: (context) {
+          return DateProvider();
+        }),
+        ChangeNotifierProvider(create: (context) {
+          return PaymentOptionProvider();
+        }),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
-        // splitScreenMode: true,
+        splitScreenMode: true,
         builder: (BuildContext context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -47,7 +58,7 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: const LoginOrRegister(),
+        child: const SplaashScreen(),
       ),
     );
   }

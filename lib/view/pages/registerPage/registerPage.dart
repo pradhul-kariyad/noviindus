@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 import 'package:noviindus/provider/patientUpdateProvider/patientUpdateProvider.dart';
 import 'package:noviindus/view/pages/home/homePage.dart';
-import 'package:noviindus/view/pages/registerPage/paymentOptionRow/paymentOptionRow.dart';
+import 'package:noviindus/view/widgets/registerWidgets/paymentOptionRow/paymentOptionRow.dart';
 import 'package:noviindus/view/widgets/editGender/editGender.dart';
 import 'package:noviindus/view/widgets/myForm/locationForm/locationForm.dart';
 import 'package:noviindus/view/widgets/myButton/addButton.dart';
@@ -20,7 +20,7 @@ import 'package:noviindus/view/widgets/myForm/treatmentTimeForm/treatmentTimeFor
 import 'package:noviindus/view/widgets/myIcons/myIcons.dart';
 import 'package:noviindus/view/widgets/myForm/nameForm/nameForm.dart';
 import 'package:noviindus/view/widgets/myForm/whatsAppForm/whatsAppForm.dart';
-import 'package:noviindus/view/widgets/registerWidget/registerContainer/registerContainer.dart';
+import 'package:noviindus/view/widgets/registerWidgets/registerContainer/registerContainer.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -50,7 +50,7 @@ class RegisterPage extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               ),
             );
           },
@@ -79,11 +79,46 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               const Divider(),
-              NameForm(controller: _nameController),
-              WhatsAppForm(controller: _whatsAppController),
-              AddressForm(controller: _addressController),
-              LocationForm(),
-              BranchForm(controller: _branchController),
+              NameForm(
+                controller: _nameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter your name';
+                  }
+                  return null;
+                },
+              ),
+              WhatsAppForm(
+                controller: _whatsAppController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter your whatsapp number';
+                  }
+                  return null;
+                },
+              ),
+              AddressForm(
+                  controller: _addressController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your address';
+                    }
+                    return null;
+                  }),
+              LocationForm(validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter your location';
+                }
+                return null;
+              }),
+              BranchForm(
+                  controller: _branchController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your branch';
+                    }
+                    return null;
+                  }),
               Padding(
                 padding: EdgeInsets.only(
                     left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
@@ -102,12 +137,9 @@ class RegisterPage extends StatelessWidget {
                   print('Clear button tapped');
                 },
                 editTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditGender(),
-                    ),
-                  );
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const EditGender();
+                  }));
                 },
               ),
               AddButton(
@@ -115,8 +147,22 @@ class RegisterPage extends StatelessWidget {
                   print('Add button tapped');
                 },
               ),
-              TotalAmountForm(controller: _totalAmountController),
-              DiscountAmountForm(controller: _discountAmountController),
+              TotalAmountForm(
+                  controller: _totalAmountController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your total amount';
+                    }
+                    return null;
+                  }),
+              DiscountAmountForm(
+                  controller: _discountAmountController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your discount amount';
+                    }
+                    return null;
+                  }),
               Padding(
                 padding: EdgeInsets.only(
                     left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
@@ -131,10 +177,44 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               PaymentOptionRow(),
-              AdvanceAmountForm(controller: _advanceAmountController),
-              BalanceAmountForm(controller: _balanceAmountController),
-              TreatmentDateForm(controller: _treatmentDateController),
-              TreatmentTimeForm(controller: _treatmentTimeController),
+              AdvanceAmountForm(
+                  controller: _advanceAmountController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your advance amount';
+                    }
+                    return null;
+                  }),
+              BalanceAmountForm(
+                  controller: _balanceAmountController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your balance amount';
+                    }
+                    return null;
+                  }),
+              TreatmentDateForm(
+                  controller: _treatmentDateController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your treatment date';
+                    }
+                    return null;
+                  }),
+              TreatmentTimeForm(
+                  controllerOne: _treatmentTimeController,
+                  validatorTwo: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your time';
+                    }
+                    return null;
+                  },
+                  validatorOne: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your time';
+                    }
+                    return null;
+                  }),
               SizedBox(height: 35.h),
               Consumer<PatientUpdateProvider>(
                 builder: (BuildContext context, patientUpdateProvider,
@@ -147,7 +227,7 @@ class RegisterPage extends StatelessWidget {
                         patientUpdateProvider.updatePatient(
                           name: _nameController.text,
                           executive: "Default Executive",
-                          payment: "Cash",
+                          payment: "Card",
                           phone: _whatsAppController.text,
                           address: _addressController.text,
                           totalAmount: double.tryParse(

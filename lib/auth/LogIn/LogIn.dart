@@ -10,14 +10,14 @@ import 'package:noviindus/view/widgets/myButton/myButton.dart';
 import 'package:noviindus/view/widgets/myForm/passwordForm/passwordForm.dart';
 import 'package:provider/provider.dart';
 
-class LoginOrRegister extends StatefulWidget {
-  const LoginOrRegister({super.key});
+class LogIn extends StatefulWidget {
+  const LogIn({super.key});
 
   @override
-  State<LoginOrRegister> createState() => _LoginOrRegisterState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _LoginOrRegisterState extends State<LoginOrRegister> {
+class _LogInState extends State<LogIn> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -70,9 +70,6 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
               ),
               EmailForm(
                 controller: _emailController,
-                // onSaved: (value) {
-                //   _email = value;
-                // },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';

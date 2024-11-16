@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 
 class LocationForm extends StatefulWidget {
-  const LocationForm({super.key});
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  const LocationForm({super.key, this.validator, this.controller});
 
   @override
   _LocationFormState createState() => _LocationFormState();
@@ -52,6 +54,7 @@ class _LocationFormState extends State<LocationForm> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: DropdownButtonFormField<String>(
+            validator: widget.validator,
             value: selectedLocation,
             hint: Text(
               'Choose your location',

@@ -1,18 +1,12 @@
 // ignore_for_file: avoid_print, library_private_types_in_public_api, file_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
+import 'package:noviindus/provider/paymentOptionProvider/paymentOptionProvider.dart';
+import 'package:provider/provider.dart';
 
-class PaymentOptionRow extends StatefulWidget {
+class PaymentOptionRow extends StatelessWidget {
   const PaymentOptionRow({super.key});
-
-  @override
-  _PaymentOptionRowState createState() => _PaymentOptionRowState();
-}
-
-class _PaymentOptionRowState extends State<PaymentOptionRow> {
-  String selectedOption = '';
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +16,10 @@ class _PaymentOptionRowState extends State<PaymentOptionRow> {
         children: [
           InkWell(
             onTap: () {
-              setState(() {
-                selectedOption = 'Cash';
-                print('Cash');
-              });
+              context
+                  .read<PaymentOptionProvider>()
+                  .updateSelectedOption('Cash');
+              print('Cash');
             },
             child: Container(
               decoration: BoxDecoration(
@@ -37,7 +31,11 @@ class _PaymentOptionRowState extends State<PaymentOptionRow> {
               ),
               child: CircleAvatar(
                 radius: 10.sp,
-                backgroundColor: selectedOption == 'Cash' ? green : white,
+                backgroundColor:
+                    context.watch<PaymentOptionProvider>().selectedOption ==
+                            'Cash'
+                        ? green
+                        : white,
               ),
             ),
           ),
@@ -54,10 +52,10 @@ class _PaymentOptionRowState extends State<PaymentOptionRow> {
           SizedBox(width: 70.w),
           InkWell(
             onTap: () {
-              setState(() {
-                print('Card');
-                selectedOption = 'Card';
-              });
+              context
+                  .read<PaymentOptionProvider>()
+                  .updateSelectedOption('Card');
+              print('Card');
             },
             child: Container(
               decoration: BoxDecoration(
@@ -69,7 +67,11 @@ class _PaymentOptionRowState extends State<PaymentOptionRow> {
               ),
               child: CircleAvatar(
                 radius: 10.sp,
-                backgroundColor: selectedOption == 'Card' ? green : white,
+                backgroundColor:
+                    context.watch<PaymentOptionProvider>().selectedOption ==
+                            'Card'
+                        ? green
+                        : white,
               ),
             ),
           ),
@@ -86,10 +88,8 @@ class _PaymentOptionRowState extends State<PaymentOptionRow> {
           SizedBox(width: 80.w),
           InkWell(
             onTap: () {
-              setState(() {
-                selectedOption = 'UPI';
-                print('UPI');
-              });
+              context.read<PaymentOptionProvider>().updateSelectedOption('UPI');
+              print('UPI');
             },
             child: Container(
               decoration: BoxDecoration(
@@ -101,7 +101,11 @@ class _PaymentOptionRowState extends State<PaymentOptionRow> {
               ),
               child: CircleAvatar(
                 radius: 10.sp,
-                backgroundColor: selectedOption == 'UPI' ? green : white,
+                backgroundColor:
+                    context.watch<PaymentOptionProvider>().selectedOption ==
+                            'UPI'
+                        ? green
+                        : white,
               ),
             ),
           ),

@@ -4,9 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
 
 class TreatmentTimeForm extends StatelessWidget {
-  final String? Function(String?)? validator;
-  final TextEditingController? controller;
-  const TreatmentTimeForm({super.key, this.validator, this.controller});
+  final String? Function(String?)? validatorOne;
+  final String? Function(String?)? validatorTwo;
+  final TextEditingController? controllerOne;
+  final TextEditingController? controllerTwo;
+  const TreatmentTimeForm(
+      {super.key,
+      this.validatorOne,
+      this.controllerOne,
+      this.validatorTwo,
+      this.controllerTwo});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +40,10 @@ class TreatmentTimeForm extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(right: 5.w),
                   child: TextFormField(
-                    validator: validator,
+                    validator: validatorOne,
+                    keyboardType: TextInputType.number,
                     // obscureText: obscureText,
-                    controller: controller,
+                    controller: controllerOne,
                     decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.keyboard_arrow_down_sharp,
@@ -72,9 +80,10 @@ class TreatmentTimeForm extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(left: 5.w),
                   child: TextFormField(
-                    // validator: validator,
+                    keyboardType: TextInputType.number,
+                    validator: validatorTwo,
                     // obscureText: obscureText,
-                    // controller: controller,
+                    controller: controllerTwo,
                     decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.keyboard_arrow_down_sharp,

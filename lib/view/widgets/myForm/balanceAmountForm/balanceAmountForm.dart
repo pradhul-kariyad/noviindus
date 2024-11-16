@@ -29,6 +29,7 @@ class BalanceAmountForm extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: TextFormField(
             validator: validator,
+            keyboardType: TextInputType.number,
             // obscureText: obscureText,
             controller: controller,
             decoration: InputDecoration(

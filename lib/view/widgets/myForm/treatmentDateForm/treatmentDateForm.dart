@@ -1,50 +1,16 @@
-// ignore_for_file: library_private_types_in_public_api, file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
+import 'package:noviindus/provider/homeRowProvider/homeRowProvider.dart';
+import 'package:provider/provider.dart';
 
-class TreatmentDateForm extends StatefulWidget {
+class TreatmentDateForm extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
 
   const TreatmentDateForm({super.key, this.validator, this.controller});
-
-  @override
-  _TreatmentDateFormState createState() => _TreatmentDateFormState();
-}
-
-class _TreatmentDateFormState extends State<TreatmentDateForm> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = widget.controller ?? TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null) {
-      setState(() {
-        _controller.text = "${picked.day}/${picked.month}/${picked.year}";
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,43 +32,83 @@ class _TreatmentDateFormState extends State<TreatmentDateForm> {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: TextFormField(
-            controller: _controller,
-            readOnly: true, // Prevent manual typing.
-            onTap: () => _selectDate(context),
-            decoration: InputDecoration(
-              suffixIcon: Icon(
-                Icons.calendar_today_outlined,
-                color: green,
-                size: 15.sp,
-              ),
-              hintText: 'Select Date',
-              hintStyle: TextStyle(
-                color: Colors.grey,
-                fontFamily: 'Poppins',
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: BorderSide(color: textBorderColor),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: BorderSide(color: textBorderColor),
-              ),
-              fillColor: textFieldColor,
-              filled: true,
-            ),
-            style: TextStyle(
-              color: myBlack,
-              fontFamily: 'Poppins',
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w400,
-            ),
+          child: Consumer<DateProvider>(
+            builder: (context, dateProvider, child) {
+              return TextFormField(
+                controller: controller,
+                readOnly: true,
+                onTap: () {
+                  _selectDate(context);
+                },
+                decoration: InputDecoration(
+                  suffixIcon: Icon(
+                    Icons.calendar_today_outlined,
+                    color: green,
+                    size: 15.sp,
+                  ),
+                  hintText: dateProvider.selectedDate.isEmpty
+                      ? 'Select Date'
+                      : dateProvider.selectedDate,
+                  hintStyle: TextStyle(
+                    color: dateProvider.selectedDate.isEmpty
+                        ? Colors.grey
+                        : myBlack,
+                    fontFamily: 'Poppins',
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                    borderSide: BorderSide(color: textBorderColor),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                    borderSide: BorderSide(color: textBorderColor),
+                  ),
+                  fillColor: textFieldColor,
+                  filled: true,
+                ),
+                style: TextStyle(
+                  color: myBlack,
+                  fontFamily: 'Poppins',
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              );
+            },
           ),
         ),
       ],
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: green,
+              onPrimary: white,
+              onSurface: black,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: green,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      String formattedDate = "${picked.day}/${picked.month}/${picked.year}";
+      context.read<DateProvider>().updateDate(formattedDate);
+    }
   }
 }

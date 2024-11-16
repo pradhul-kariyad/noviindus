@@ -30,6 +30,7 @@ class WhatsAppForm extends StatelessWidget {
           child: TextFormField(
             validator: validator,
             // obscureText: obscureText,
+            keyboardType: TextInputType.number,
             controller: controller,
             decoration: InputDecoration(
               hintText: 'Enter your Whatsapp number',
