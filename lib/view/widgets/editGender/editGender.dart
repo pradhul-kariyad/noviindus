@@ -52,86 +52,49 @@ class _EditGenderState extends State<EditGender> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 210.h),
-                child: Container(
-                  width: 290.w,
-                  height: 290.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.sp),
-                    color: white,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ChooseTreatmentForm(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
-                        child: Text(
-                          'Add Patients',
-                          style: TextStyle(
-                              color: myBlack,
-                              fontFamily: 'Poppins',
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+              child: Container(
+                width: 290.w,
+                height: 290.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.sp),
+                  color: white,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ChooseTreatmentForm(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 20.w, right: 15.w, bottom: 3.h, top: 15.h),
+                      child: Text(
+                        'Add Patients',
+                        style: TextStyle(
+                            color: myBlack,
+                            fontFamily: 'Poppins',
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500),
                       ),
-                      // Male Counter Row
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                width: 110.w,
-                                height: 39.h,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1.w, color: textBorderColor),
-                                  color: textFieldColor,
-                                  borderRadius: BorderRadius.circular(8.sp),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 13, left: 10.w),
-                                  child: Text(
-                                    'Male',
-                                    style: TextStyle(
-                                        color: black,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10.w),
-                            InkWell(
-                              onTap: _decrementMale,
-                              child: CircleAvatar(
-                                radius: 20.sp,
-                                backgroundColor: green,
-                                child: Icon(
-                                  Icons.remove,
-                                  color: white,
-                                  size: 28.sp,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 5.w),
-                              width: 50.w,
+                    ),
+                    // Male Counter Row
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {},
+                            child: Container(
+                              width: 110.w,
                               height: 39.h,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 1.w, color: textBorderColor),
-                                color: white,
+                                color: textFieldColor,
                                 borderRadius: BorderRadius.circular(8.sp),
                               ),
-                              child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 13, left: 10.w),
                                 child: Text(
-                                  '$_maleCount',
+                                  'Male',
                                   style: TextStyle(
                                       color: black,
                                       fontFamily: 'Poppins',
@@ -140,78 +103,78 @@ class _EditGenderState extends State<EditGender> {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 5.w),
-                            InkWell(
-                              onTap: _incrementMale,
-                              child: CircleAvatar(
-                                radius: 20.sp,
-                                backgroundColor: green,
-                                child: Icon(
-                                  Icons.add,
-                                  color: white,
-                                  size: 28.sp,
-                                ),
+                          ),
+                          SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: _decrementMale,
+                            child: CircleAvatar(
+                              radius: 20.sp,
+                              backgroundColor: green,
+                              child: Icon(
+                                Icons.remove,
+                                color: white,
+                                size: 28.sp,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 5.w),
+                            width: 50.w,
+                            height: 39.h,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1.w, color: textBorderColor),
+                              color: white,
+                              borderRadius: BorderRadius.circular(8.sp),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '$_maleCount',
+                                style: TextStyle(
+                                    color: black,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 5.w),
+                          InkWell(
+                            onTap: _incrementMale,
+                            child: CircleAvatar(
+                              radius: 20.sp,
+                              backgroundColor: green,
+                              child: Icon(
+                                Icons.add,
+                                color: white,
+                                size: 28.sp,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 10.h),
-                      // Female Counter Row
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                width: 110.w,
-                                height: 39.h,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1.w, color: textBorderColor),
-                                  color: textFieldColor,
-                                  borderRadius: BorderRadius.circular(8.sp),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 13, left: 10.w),
-                                  child: Text(
-                                    'Female',
-                                    style: TextStyle(
-                                        color: black,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10.w),
-                            InkWell(
-                              onTap: _decrementFemale,
-                              child: CircleAvatar(
-                                radius: 20.sp,
-                                backgroundColor: green,
-                                child: Icon(
-                                  Icons.remove,
-                                  color: white,
-                                  size: 28.sp,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 5.w),
-                              width: 50.w,
+                    ),
+                    SizedBox(height: 10.h),
+                    // Female Counter Row
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {},
+                            child: Container(
+                              width: 110.w,
                               height: 39.h,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 1.w, color: textBorderColor),
-                                color: white,
+                                color: textFieldColor,
                                 borderRadius: BorderRadius.circular(8.sp),
                               ),
-                              child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 13, left: 10.w),
                                 child: Text(
-                                  '$_femaleCount',
+                                  'Female',
                                   style: TextStyle(
                                       color: black,
                                       fontFamily: 'Poppins',
@@ -220,43 +183,77 @@ class _EditGenderState extends State<EditGender> {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 5.w),
-                            InkWell(
-                              onTap: _incrementFemale,
-                              child: CircleAvatar(
-                                radius: 20.sp,
-                                backgroundColor: green,
-                                child: Icon(
-                                  Icons.add,
-                                  color: white,
-                                  size: 28.sp,
-                                ),
+                          ),
+                          SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: _decrementFemale,
+                            child: CircleAvatar(
+                              radius: 20.sp,
+                              backgroundColor: green,
+                              child: Icon(
+                                Icons.remove,
+                                color: white,
+                                size: 28.sp,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 5.w),
+                            width: 50.w,
+                            height: 39.h,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1.w, color: textBorderColor),
+                              color: white,
+                              borderRadius: BorderRadius.circular(8.sp),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '$_femaleCount',
+                                style: TextStyle(
+                                    color: black,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 5.w),
+                          InkWell(
+                            onTap: _incrementFemale,
+                            child: CircleAvatar(
+                              radius: 20.sp,
+                              backgroundColor: green,
+                              child: Icon(
+                                Icons.add,
+                                color: white,
+                                size: 28.sp,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 20.h),
-                        child: MyButton(
-                          name: 'Save',
-                          onTap: () {
-                            Navigator.pop(context, {
-                              'maleCount': _maleCount,
-                              'femaleCount': _femaleCount,
-                            });
-                            print("Save button");
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(left: 15.w, right: 15.w, top: 20.h),
+                      child: MyButton(
+                        name: 'Save',
+                        onTap: () {
+                          Navigator.pop(context, {
+                            'maleCount': _maleCount,
+                            'femaleCount': _femaleCount,
+                          });
+                          print("Save button");
+                        },
+                      ),
+                    )
+                  ],
                 ),
               ),
             )
           ],
-        ),
+        )
       ),
     );
   }

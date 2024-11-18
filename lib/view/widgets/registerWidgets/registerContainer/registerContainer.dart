@@ -7,10 +7,14 @@ import 'package:noviindus/colors/colors.dart';
 class RegisterContainer extends StatefulWidget {
   final void Function()? clearTap;
   final void Function()? editTap;
+  final int maleCount;
+  final int femaleCount;
   const RegisterContainer({
     super.key,
     this.clearTap,
     this.editTap,
+    required this.maleCount,
+    required this.femaleCount,
   });
 
   @override
@@ -89,7 +93,7 @@ class _RegisterContainerState extends State<RegisterContainer> {
                       borderRadius: BorderRadius.circular(3.sp),
                     ),
                     child: Text(
-                      '287',
+                      '${widget.maleCount}',
                       style: TextStyle(
                         color: green,
                         fontFamily: 'Poppins',
@@ -116,7 +120,7 @@ class _RegisterContainerState extends State<RegisterContainer> {
                       borderRadius: BorderRadius.circular(3.sp),
                     ),
                     child: Text(
-                      '222',
+                      '${widget.femaleCount}',
                       style: TextStyle(
                         color: green,
                         fontFamily: 'Poppins',

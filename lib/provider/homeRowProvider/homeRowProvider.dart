@@ -13,12 +13,10 @@ class HomeRowProvider extends ChangeNotifier {
 }
 
 class DateProvider extends ChangeNotifier {
-  String _selectedDate = '';
-
-  String get selectedDate => _selectedDate;
+  String selectedDate = "";
 
   void updateDate(String date) {
-    _selectedDate = date;
+    selectedDate = date;
     notifyListeners();
   }
 }

@@ -1,16 +1,17 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_import
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:noviindus/models/branchListModel/branchListModel.dart';
 import 'package:noviindus/models/patientListModel/patientListModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PatientListService {
-  Future<PatientListModel> getAll() async {
+class BranchListService {
+  Future<BranchListModel> getAll() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
     final response = await http.get(
-      Uri.parse('https://flutter-amr.noviindus.in/api/PatientList'),
+      Uri.parse('https://flutter-amr.noviindus.in/api/BranchList'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },
@@ -20,16 +21,15 @@ class PatientListService {
     log('API Response Status: ${response.statusCode}');
 
     if (response.statusCode == 200) {
-      log('BranchList successful');
       try {
         final data = json.decode(response.body);
         log('Parsed Data: $data');
-        return PatientListModel.fromJson(data);
+        return BranchListModel.fromJson(data);
       } catch (e) {
         log('Error parsing response: $e');
-        return PatientListModel();
+        return BranchListModel();
       }
     }
-    return PatientListModel();
+    return BranchListModel();
   }
 }

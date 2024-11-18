@@ -1,12 +1,14 @@
 // ignore_for_file: unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:noviindus/auth/LogIn/LogIn.dart';
 import 'package:noviindus/provider/PatientListProvider/PatientListDataProvider.dart';
 import 'package:noviindus/provider/auth/loginProvider.dart';
+import 'package:noviindus/provider/branchListProvider/branchListDataProvider.dart';
 import 'package:noviindus/provider/homeRowProvider/homeRowProvider.dart';
+import 'package:noviindus/provider/patientCountProvider/patientCountProvider.dart';
 import 'package:noviindus/provider/patientUpdateProvider/patientUpdateProvider.dart';
 import 'package:noviindus/provider/paymentOptionProvider/paymentOptionProvider.dart';
+import 'package:noviindus/provider/treatmentDataProvider/treatmentDataProvider.dart.dart';
 import 'package:noviindus/view/pages/home/homePage.dart';
 import 'package:noviindus/view/pages/registerPage/registerPage.dart';
 import 'package:noviindus/view/screens/splaashScreen/splaashScreen.dart';
@@ -41,6 +43,15 @@ class MyApp extends StatelessWidget {
         }),
         ChangeNotifierProvider(create: (context) {
           return PaymentOptionProvider();
+        }),
+        ChangeNotifierProvider(create: (context) {
+          return BranchDataProvider();
+        }),
+        ChangeNotifierProvider(create: (context) {
+          return TreatmentDataProvider();
+        }),
+        ChangeNotifierProvider(create: (context) {
+          return PatientCountProvider();
         }),
       ],
       child: ScreenUtilInit(

@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';
@@ -8,6 +9,7 @@ class TreatmentTimeForm extends StatelessWidget {
   final String? Function(String?)? validatorTwo;
   final TextEditingController? controllerOne;
   final TextEditingController? controllerTwo;
+
   const TreatmentTimeForm(
       {super.key,
       this.validatorOne,
@@ -26,10 +28,11 @@ class TreatmentTimeForm extends StatelessWidget {
           child: Text(
             'Treatment Time',
             style: TextStyle(
-                color: myBlack,
-                fontFamily: 'Poppins',
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500),
+              color: myBlack,
+              fontFamily: 'Poppins',
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         Padding(
@@ -39,80 +42,108 @@ class TreatmentTimeForm extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(right: 5.w),
-                  child: TextFormField(
+                  child: DropdownButtonFormField<String>(
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_sharp,
+                      color: green,
+                      size: 10.sp,
+                    ),
                     validator: validatorOne,
-                    keyboardType: TextInputType.number,
-                    // obscureText: obscureText,
-                    controller: controllerOne,
                     decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.keyboard_arrow_down_sharp,
-                        color: green,
-                        size: 28.sp,
-                      ),
                       hintText: 'Hour',
                       hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontFamily: 'Poppins',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
+                        color: Colors.grey,
+                        fontFamily: 'Poppins',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      alignLabelWithHint: true,
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide(color: textBorderColor)),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: textBorderColor),
+                      ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: textBorderColor),
-                          borderRadius: BorderRadius.circular(14)),
+                        borderSide: BorderSide(color: textBorderColor),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide(color: textBorderColor)),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: textBorderColor),
+                      ),
                       fillColor: textFieldColor,
                       filled: true,
                     ),
-                    style: TextStyle(
-                        color: myBlack,
-                        fontFamily: 'Poppins',
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w400),
+                    items: List.generate(24, (index) {
+                      return DropdownMenuItem<String>(
+                        value: index.toString(),
+                        child: Text(
+                          index.toString().padLeft(2, '0'),
+                          style: TextStyle(
+                            color: myBlack,
+                            fontFamily: 'Poppins',
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      );
+                    }),
+                    onChanged: (value) {
+                      controllerOne?.text = value ?? '';
+                    },
                   ),
                 ),
               ),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(left: 5.w),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
+                  child: DropdownButtonFormField<String>(
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_sharp,
+                      color: green,
+                      size: 10.sp,
+                    ),
                     validator: validatorTwo,
-                    // obscureText: obscureText,
-                    controller: controllerTwo,
                     decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.keyboard_arrow_down_sharp,
-                        color: green,
-                        size: 28.sp,
-                      ),
                       hintText: 'Minutes',
                       hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontFamily: 'Poppins',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
+                        color: Colors.grey,
+                        fontFamily: 'Poppins',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      alignLabelWithHint: true,
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide(color: textBorderColor)),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: textBorderColor),
+                      ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: textBorderColor),
-                          borderRadius: BorderRadius.circular(14)),
+                        borderSide: BorderSide(color: textBorderColor),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide(color: textBorderColor)),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: textBorderColor),
+                      ),
                       fillColor: textFieldColor,
                       filled: true,
                     ),
-                    style: TextStyle(
-                        color: myBlack,
-                        fontFamily: 'Poppins',
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w400),
+                    items: List.generate(60, (index) {
+                      return DropdownMenuItem<String>(
+                        value: index.toString(),
+                        child: Text(
+                          index.toString().padLeft(2, '0'),
+                          style: TextStyle(
+                            color: myBlack,
+                            fontFamily: 'Poppins',
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      );
+                    }),
+                    onChanged: (value) {
+                      controllerTwo?.text = value ?? '';
+                    },
                   ),
                 ),
               ),

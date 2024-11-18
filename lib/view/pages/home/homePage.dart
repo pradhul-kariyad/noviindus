@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, unused_import, avoid_print
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:noviindus/auth/LogIn/LogIn.dart';
+import 'package:noviindus/auth/LoginOrRegister/LogIn.dart';
 import 'package:noviindus/colors/colors.dart';
 import 'package:noviindus/provider/PatientListProvider/PatientListDataProvider.dart';
 import 'package:noviindus/view/pages/registerPage/registerPage.dart';

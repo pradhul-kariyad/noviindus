@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, file_names
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:noviindus/colors/colors.dart';
@@ -40,21 +41,24 @@ class LoginProvider extends ChangeNotifier {
         String? token = result['token'];
 
         if (token != null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setString('token', token);
           await pref.setBool('userlogin', true);
           log('Token stored: $token');
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: green,
               content: Center(
                 child: Text(
                   "Welcome",
-                  style: TextStyle(color: white, fontFamily: 'Poppins'),
+                  style: TextStyle(
+                      color: white, fontFamily: 'Poppins', fontSize: 12.sp),
                 ),
               ),
             ),
@@ -63,7 +67,12 @@ class LoginProvider extends ChangeNotifier {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: green,
-              content: Text("Invalid username or password"),
+              content: Center(
+                  child: Text(
+                "Invalid username or password",
+                style: TextStyle(
+                    color: white, fontFamily: 'Poppins', fontSize: 12.sp),
+              )),
             ),
           );
         }
@@ -73,7 +82,13 @@ class LoginProvider extends ChangeNotifier {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: green,
-            content: Text(errorMessage),
+            content: Center(
+              child: Text(
+                errorMessage,
+                style: TextStyle(
+                    color: white, fontFamily: 'Poppins', fontSize: 12.sp),
+              ),
+            ),
           ),
         );
 
@@ -87,8 +102,9 @@ class LoginProvider extends ChangeNotifier {
           backgroundColor: green,
           content: Center(
             child: Text(
-              "Welcome...",
-              style: TextStyle(color: white, fontFamily: 'Poppins'),
+              "An error occurred. Please try again.",
+              style: TextStyle(
+                  color: white, fontFamily: 'Poppins', fontSize: 12.sp),
             ),
           ),
         ),
