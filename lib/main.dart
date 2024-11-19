@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, duplicate_import
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/provider/PatientListProvider/PatientListDataProvider.dart';
@@ -12,6 +12,7 @@ import 'package:noviindus/provider/treatmentDataProvider/treatmentDataProvider.d
 import 'package:noviindus/view/pages/home/homePage.dart';
 import 'package:noviindus/view/pages/registerPage/registerPage.dart';
 import 'package:noviindus/view/screens/splaashScreen/splaashScreen.dart';
+import 'package:noviindus/view/widgets/editGender/editGender.dart';
 import 'package:noviindus/view/widgets/editGender/editGender.dart';
 import 'package:provider/provider.dart';
 

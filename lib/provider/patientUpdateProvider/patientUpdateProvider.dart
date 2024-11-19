@@ -1,17 +1,18 @@
 // ignore_for_file: use_build_context_synchronously, file_names, unused_import
-
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/auth/LoginOrRegister/LogIn.dart';
 import 'package:noviindus/colors/colors.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:noviindus/pdf/pdfPatientUpdateScreen.dart';
+import 'package:noviindus/provider/branchListProvider/branchListDataProvider.dart';
+import 'package:noviindus/provider/paymentOptionProvider/paymentOptionProvider.dart';
+import 'package:noviindus/provider/treatmentDataProvider/treatmentDataProvider.dart.dart';
+import 'package:noviindus/view/pages/home/homePage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'dart:io';
 
 class PatientUpdateProvider extends ChangeNotifier {
   bool isLoading = false;
@@ -88,24 +89,12 @@ class PatientUpdateProvider extends ChangeNotifier {
 
       log('Response status code: ${response.statusCode}');
       if (response.statusCode == 200) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return PdfPatientUpdateScreen();
+        }));
         final responseBody = await response.stream.bytesToString();
         log('Response body: $responseBody');
-
-        _generatePDF(
-            name,
-            executive,
-            payment,
-            phone,
-            address,
-            totalAmount,
-            discountAmount,
-            advanceAmount,
-            balanceAmount,
-            dateAndTime,
-            male,
-            female,
-            treatments);
-
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: green,
           content: Center(
@@ -163,57 +152,5 @@ class PatientUpdateProvider extends ChangeNotifier {
     } finally {
       setLoading(false);
     }
-  }
-
-  // Generate PDF for Patient Registration
-  Future<void> _generatePDF(
-    String name,
-    String executive,
-    String payment,
-    String phone,
-    String address,
-    double totalAmount,
-    double discountAmount,
-    double advanceAmount,
-    double balanceAmount,
-    String dateAndTime,
-    List<int> male,
-    List<int> female,
-    List<int> treatments,
-  ) async {
-    final pdf = pw.Document();
-
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) {
-          return pw.Column(
-            children: [
-              pw.Text('Patient Registration Details',
-                  style: pw.TextStyle(fontSize: 24)),
-              pw.SizedBox(height: 20),
-              pw.Text('Name: $name'),
-              pw.Text('Executive: $executive'),
-              pw.Text('Payment: $payment'),
-              pw.Text('Phone: $phone'),
-              pw.Text('Address: $address'),
-              pw.Text('Total Amount: ${formatAmount(totalAmount)}'),
-              pw.Text('Discount Amount: ${formatAmount(discountAmount)}'),
-              pw.Text('Advance Amount: ${formatAmount(advanceAmount)}'),
-              pw.Text('Balance Amount: ${formatAmount(balanceAmount)}'),
-              pw.Text('Date and Time: $dateAndTime'),
-              pw.Text('Male Treatments: ${male.join(', ')}'),
-              pw.Text('Female Treatments: ${female.join(', ')}'),
-              pw.Text('Treatments: ${treatments.join(', ')}'),
-            ],
-          );
-        },
-      ),
-    );
-
-    final output = await getTemporaryDirectory();
-    final file = File('${output.path}/patient_registration.pdf');
-
-    await file.writeAsBytes(await pdf.save());
-    log("PDF generated at: ${file.path}");
   }
 }

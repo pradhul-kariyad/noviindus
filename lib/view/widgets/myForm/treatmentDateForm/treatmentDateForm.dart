@@ -106,8 +106,9 @@ class TreatmentDateForm extends StatelessWidget {
       },
     );
     if (picked != null) {
-      String formattedDate = "${picked.day}/${picked.month}/${picked.year}";
-      context.read<DateProvider>().updateDate(formattedDate);
+      String formattedDate =
+          "${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}";
+      controller?.text = formattedDate;
     }
   }
 }

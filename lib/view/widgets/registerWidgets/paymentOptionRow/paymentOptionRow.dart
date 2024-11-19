@@ -1,4 +1,5 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api, file_names
+// ignore_for_file: avoid_print, file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noviindus/colors/colors.dart';

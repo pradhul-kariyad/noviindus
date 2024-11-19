@@ -33,7 +33,7 @@ class AddButton extends StatelessWidget {
                 child: Text(
               '+ Add Treatments',
               style: TextStyle(
-                  fontSize: 13.sp,
+                  fontSize: 12.sp,
                   color: black,
                   fontFamily: 'Poppinss',
                   fontWeight: FontWeight.bold),

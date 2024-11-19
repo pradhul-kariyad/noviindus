@@ -13,7 +13,11 @@ class HomeContainer extends StatelessWidget {
     return Consumer<PatientListDataProvider>(
       builder: (BuildContext context, patientDataProvider, Widget? child) {
         if (patientDataProvider.isLoading) {
-          return Center(child: CircularProgressIndicator(color: green));
+          return Center(
+              child: CircularProgressIndicator(
+            color: green,
+            strokeAlign: -5,
+          ));
         }
 
         if (patientDataProvider.patientList.patient == null ||
@@ -122,7 +126,7 @@ class HomeContainer extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 5, top: 1.h),
                               child: Text(
-                                patient.user ?? 'Unknown',
+                                patient.phone ?? 'Unknown',
                                 style: TextStyle(
                                   color: fontColor,
                                   fontFamily: 'Poppins',
