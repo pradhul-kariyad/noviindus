@@ -275,8 +275,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
-
-                                    // Debug values to ensure they are correct
                                     print(
                                         "Date: ${_treatmentDateController.text}");
                                     print(

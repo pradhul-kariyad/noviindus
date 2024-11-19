@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, duplicate_import
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:noviindus/pdf/myPdf/myPdf.dart';
 import 'package:noviindus/provider/PatientListProvider/PatientListDataProvider.dart';
 import 'package:noviindus/provider/auth/loginProvider.dart';
 import 'package:noviindus/provider/branchListProvider/branchListDataProvider.dart';
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: const SplaashScreen(),
+        child: const Mypdf(),
       ),
     );
   }
