@@ -1,28 +1,32 @@
-// ignore_for_file: unused_import, duplicate_import
+// ignore_for_file: unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:noviindus/pdf/myPdf/myPdf.dart';
-import 'package:noviindus/provider/PatientListProvider/PatientListDataProvider.dart';
-import 'package:noviindus/provider/auth/loginProvider.dart';
-import 'package:noviindus/provider/branchListProvider/branchListDataProvider.dart';
-import 'package:noviindus/provider/homeRowProvider/homeRowProvider.dart';
-import 'package:noviindus/provider/patientCountProvider/patientCountProvider.dart';
-import 'package:noviindus/provider/patientUpdateProvider/patientUpdateProvider.dart';
-import 'package:noviindus/provider/paymentOptionProvider/paymentOptionProvider.dart';
-import 'package:noviindus/provider/treatmentDataProvider/treatmentDataProvider.dart.dart';
-import 'package:noviindus/view/pages/home/homePage.dart';
-import 'package:noviindus/view/pages/registerPage/registerPage.dart';
-import 'package:noviindus/view/screens/splaashScreen/splaashScreen.dart';
-import 'package:noviindus/view/widgets/editGender/editGender.dart';
-import 'package:noviindus/view/widgets/editGender/editGender.dart';
+import 'package:noviindus/auth/login/login_screen.dart';
+import 'package:noviindus/pdf/my_pdf/my_pdf.dart';
+import 'package:noviindus/provider/login_provider/login_provider.dart';
+import 'package:noviindus/provider/patient_provider/patient_data_provider.dart';
+import 'package:noviindus/provider/branch_provider/branch_data_provider.dart';
+import 'package:noviindus/provider/home_row_provider/home_row_provider.dart';
+import 'package:noviindus/provider/patient_count_provider/patient_count_provider.dart';
+import 'package:noviindus/provider/patient_update_provider/patient_update_provider.dart';
+import 'package:noviindus/provider/payment_option_provider/payment_option_provider.dart';
+import 'package:noviindus/provider/treatment_data_provider/treatment_data_provider.dart';
+import 'package:noviindus/view/pages/home/home_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool userId = prefs.getBool('userId') ?? false;
+  runApp(MyApp(
+    userId: userId,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool userId;
+  const MyApp({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,7 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: const Mypdf(),
+        child: userId ? HomePage() : LoginScreen(),
       ),
     );
   }
